@@ -20,6 +20,21 @@ module.exports = gql`
     createdAt: String
   }
 
+  type SendedMessage{
+    from: String!,
+    to: String!,
+    messageData: String!,
+  }
+
+  type Messages{
+    id: Int!,
+    from: String!,
+    to: String!,
+    messageData: String!,
+    createdAt: String!,
+    UpdatedAt: String!
+  }
+
 
   type Query {
     getUsers: [User],
@@ -27,7 +42,11 @@ module.exports = gql`
     login(
       email: String!, 
       password: String!
-    ): LoginUsernameAndToken
+    ): LoginUsernameAndToken,
+
+    getUserChat(
+      otherUser: String!
+    ):[Messages]
   }
 
   type Mutation {
@@ -37,6 +56,11 @@ module.exports = gql`
       username: String!, 
       comfirmPassword: String!
     ): CreatedUser
+
+    sendMessage(
+      to: String!,
+      messageData: String!
+    ): SendedMessage
   }
 `;
 //module.exports = typeDefs;
