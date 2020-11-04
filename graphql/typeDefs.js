@@ -26,7 +26,7 @@ module.exports = gql`
     messageData: String!,
   }
 
-  type Messages{
+  type Message{
     id: Int!,
     from: String!,
     to: String!,
@@ -35,9 +35,18 @@ module.exports = gql`
     UpdatedAt: String!
   }
 
+  type UserWithLastMessage {
+    username: String!,
+    id: Int!,
+    email: String,
+    userpic: String!,
+    createdAt: String!,
+    lastMessage: Message  
+  }
+
 
   type Query {
-    getUsers: [User],
+    getUsers: [UserWithLastMessage],
 
     login(
       email: String!, 
@@ -46,7 +55,7 @@ module.exports = gql`
 
     getUserChat(
       otherUser: String!
-    ):[Messages]
+    ):[Message]
   }
 
   type Mutation {

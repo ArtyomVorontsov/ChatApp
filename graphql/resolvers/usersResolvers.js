@@ -1,4 +1,4 @@
-const { User } = require("../../models");
+const { User, Messages } = require("../../models");
 const { UserInputError } = require("apollo-server");
 const bcryptjs = require("bcryptjs");
 const jwt = require("jsonwebtoken");
@@ -15,8 +15,30 @@ module.exports = {
         if (context.err) {
           throw new UserInputError("Unauthorized", { error: context.err })
         }
-        const users = await User.findAll({ where: { username: { [Op.ne]: username } } });
-        console.log(users)
+        let users = await User.findAll({
+          attributes: ['username', 'createdAt', 'id', 'userpic'],
+          where: { username: { [Op.ne]: username } }
+        });
+
+        let allUserMessages = await Messages.findAll({
+          where: {
+            [Op.or]: [
+              {from: username},
+              {to: username},
+            ],
+          },
+          order: [["createdAt", "DESC"]]
+        })
+
+        users = users.map((user)=>{
+          const lastetMessage = allUserMessages.find((message)=>{
+             return message.to === user.username || message.from === user.username
+          })
+          user.lastMessage = lastetMessage
+          return user
+        })
+
+
         return users
       } catch (error) {
         throw error

@@ -4,20 +4,23 @@ const { UserInputError } = require("apollo-server");
 
 module.exports = {
     Query: {
-        getUserChat: async (parent, {otherUser}, context, info) => {
+        getUserChat: async (parent, { otherUser }, context, info) => {
             try {
-               
-                if(context.err){
-                    throw new UserInputError("Unauthorized", {error: "You are unauthorized"})
+
+                if (!context.username) {
+                    throw new UserInputError("Unauthorized", { error: "You are unauthorized" })
                 }
-                let messages = await Messages.findAll({where: {
-                    from: [otherUser, context.username],
-                    to: [otherUser, context.username]
-                }})
+                let messages = await Messages.findAll({
+                    where: {
+                        from: [otherUser, context.username],
+                        to: [context.username, otherUser]
+                    },
+                    order: [['createdAt', 'DESC']]
+                })
                 console.log(messages)
                 return messages
 
-            } catch (error) {
+            } catch (err) {
                 let res = new UserInputError("Bad input", { errors: err });
                 throw res;
             }
@@ -29,6 +32,10 @@ module.exports = {
             try {
                 let username = context.username;
                 let recipient = await User.findOne({ where: { username: to } });
+
+                if (!context.username) {
+                    throw new UserInputError("Unauthorized", { Error: "Unauthorized" });
+                }
 
                 if (!recipient) {
                     throw new UserInputError("User not found", { Error: "User not found" });
