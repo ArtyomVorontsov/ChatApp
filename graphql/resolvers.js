@@ -1,6 +1,8 @@
-const sequelize = require("sequelize");
 const messagesResolvers = require("./resolvers/messagesResolvers");
 const usersResolvers = require("./resolvers/usersResolvers");
+const {PubSub} = require("apollo-server");
+const pubSub = new PubSub();
+
 module.exports = {
 
   UserWithLastMessage: {
@@ -25,6 +27,12 @@ module.exports = {
 
   Mutation: {
     createUser: usersResolvers.Mutation.createUser,
-    sendMessage: messagesResolvers.Mutation.sendMessage
+    sendMessage: messagesResolvers.Mutation.sendMessage,
+    setReaction: messagesResolvers.Mutation.setReaction
+  },
+
+  Subscription: {
+    ...messagesResolvers.Subscription
   }
+
 };

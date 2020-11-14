@@ -23,7 +23,8 @@ module.exports = gql`
   type SendedMessage{
     from: String!,
     to: String!,
-    messageData: String!,
+    messageData: String!
+    createdAt: String!,
   }
 
   type Message{
@@ -33,6 +34,7 @@ module.exports = gql`
     messageData: String!,
     createdAt: String!,
     UpdatedAt: String!
+    reaction: String
   }
 
   type UserWithLastMessage {
@@ -66,10 +68,20 @@ module.exports = gql`
       comfirmPassword: String!
     ): CreatedUser
 
+    setReaction(
+      typeOfReaction: String!,
+      messageId: Int!,
+    ): Message
+
     sendMessage(
       to: String!,
       messageData: String!
     ): SendedMessage
   }
+
+  type Subscription {
+    newMessage: Message,
+    newReaction: Message
+  }
 `;
-//module.exports = typeDefs;
+

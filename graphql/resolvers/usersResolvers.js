@@ -86,6 +86,7 @@ module.exports = {
         }
 
       } catch (errors) {
+        console.log(errors)
         throw errors
       }
     }
