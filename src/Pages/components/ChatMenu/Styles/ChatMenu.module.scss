@@ -1,0 +1,69 @@
+@mixin transparentParagraph {
+    font-size: 30px;
+    font-weight: 500;
+    color: rgba($color: #000000, $alpha: 0.1);
+}
+
+@mixin alignItems($flexDirection) {
+    display: flex;
+    flex-direction: $flexDirection;
+    align-items: center;
+    justify-content: center;
+}
+
+@mixin fullWidthAndHeight {
+    width: 100%;
+    height: 100%;
+}
+
+$color: white;
+
+.initialScreen{
+    background-color: $color;
+   @include fullWidthAndHeight();
+   @include alignItems(column);
+    p{
+      @include transparentParagraph();
+    }
+}
+
+.chatMenu{
+    padding-top: 20px;
+    border: solid 1px transparent;
+    background-color: $color;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    @include fullWidthAndHeight();
+    overflow: scroll;
+}
+
+.firstChat{
+    background-color: $color;
+    @include alignItems(column);
+    @include fullWidthAndHeight();
+
+    p{
+        @include transparentParagraph();
+    }
+}
+
+.input{
+    background-color: $color;
+    @include alignItems(row);
+    height: 100px;
+    button{
+        width: 100px;
+    }
+
+    input{
+        width: 400px;
+    }
+}
+
+.chatField{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}

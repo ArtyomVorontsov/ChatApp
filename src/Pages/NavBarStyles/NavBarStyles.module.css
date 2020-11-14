@@ -1,0 +1,9 @@
+.settingsModal {
+  position: absolute;
+  top: 0px;
+  width: 200px;
+  height: 200px;
+  background-color: white;
+  z-index: 10;
+}
+/*# sourceMappingURL=NavBarStyles.module.css.map */

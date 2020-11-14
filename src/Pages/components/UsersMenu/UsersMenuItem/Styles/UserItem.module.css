@@ -1,0 +1,75 @@
+p {
+  margin: 0;
+}
+
+.userItem {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  padding: 10px 10px 10px 10px;
+  background-color: white;
+}
+
+.userItem:hover {
+  background-color: whitesmoke;
+}
+
+.userItemSelected {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  padding: 10px 10px 10px 10px;
+  background-color: whitesmoke;
+}
+
+.userItemSelected:hover {
+  background-color: whitesmoke;
+}
+
+.userPicWrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  min-width: 50px;
+}
+
+.userPicWrapper .userPic {
+  background-color: gray;
+  min-width: 50px;
+  min-height: 50px;
+  border-radius: 50%;
+}
+
+.userInfo {
+  width: 70%;
+  margin: auto;
+}
+
+.usernameWrapper p {
+  font-weight: 600;
+}
+
+.dataWrapper p {
+  font-size: 15px;
+  color: gray;
+  font-weight: 400;
+}
+
+.dataWrapper span {
+  font-size: 11px;
+}
+/*# sourceMappingURL=UserItem.module.css.map */

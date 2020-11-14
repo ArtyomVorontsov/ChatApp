@@ -1,0 +1,64 @@
+
+p{
+    margin: 0;
+}
+
+.userItem{
+    display: flex;
+    flex-direction: row;
+    padding: 10px 10px 10px 10px;
+    background-color: white;
+
+    &:hover{
+        background-color: rgb(245, 245, 245)
+    }
+}
+
+.userItemSelected{
+    display: flex;
+    flex-direction: row;
+    padding: 10px 10px 10px 10px;
+    background-color: rgb(245, 245, 245);
+
+    &:hover{
+        background-color: rgb(245, 245, 245)
+    }
+}
+
+.userPicWrapper{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 50px;
+
+    .userPic{
+        background-color: gray;
+        min-width: 50px;
+        min-height: 50px;
+        border-radius: 50%;
+    }
+}
+
+.userInfo{
+  width: 70%;
+  margin: auto;
+}
+
+.usernameWrapper{
+    p{
+        font-weight: 600;
+    }
+}
+
+.dataWrapper{
+    p{
+        font-size: 15px;
+        color: gray;
+        font-weight: 400;
+        
+    }
+
+    span{
+        font-size: 11px;
+    }
+}
