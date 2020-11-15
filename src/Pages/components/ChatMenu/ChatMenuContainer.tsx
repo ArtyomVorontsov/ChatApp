@@ -32,6 +32,8 @@ export default function ChatMenuContainer() {
       to
       createdAt
       messageData
+      reaction
+      id
     }
   }
 `
@@ -53,7 +55,7 @@ export default function ChatMenuContainer() {
         messageData,
         from,
         to,
-        createdAt
+        createdAt,
       }
     }
   `
@@ -79,6 +81,8 @@ export default function ChatMenuContainer() {
         from
         to
         createdAt
+        id
+        reaction
       }
     }
     `

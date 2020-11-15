@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,kBAAkB,CAAA;EACd,OAAO,EAAE,IAAI;EACb,cAAc,EAAE,GAAG;EACnB,QAAQ,EAAE,QAAQ;EAClB,OAAO,EAAE,EAAE;EACX,GAAG,EAAE,CACT;CAAC;;AAED,AACI,KADC,AACA,MAAM,CAAA;EACH,KAAK,EAAE,KAAK;CACf",
+    "sources": [
+        "ReactionComponent.module.scss"
+    ],
+    "names": [],
+    "file": "ReactionComponent.module.css"
+}

@@ -1,6 +1,6 @@
 import React, { createContext, useReducer } from 'react';
-import { InitialStateType, UserReducerActionsType, UserType } from '../types/types';
-import { LOGIN, LOGOUT, SET_MESSAGES_TO_USER, SET_SELECTED_USER, SET_USERS, SET_NEW_MESSAGE } from './Actions';
+import { InitialStateType, UserReducerActionsType, UserType, MessageType } from '../types/types';
+import { LOGIN, LOGOUT, SET_MESSAGES_TO_USER, SET_SELECTED_USER, SET_USERS, SET_NEW_MESSAGE, SET_NEW_REACTION } from './Actions';
 
 
 let initialState: InitialStateType = {
@@ -20,6 +20,11 @@ export const DispatchContext = createContext();
 const userReducer = (state = initialState, action: UserReducerActionsType): InitialStateType => {
 
     let users;
+    let updatedIndex: number = 0;
+    let updatedUser: UserType | undefined;
+    let updatedMessage: MessageType | undefined;
+    let updatedUserIndex: number | undefined;
+    let updatedUsers;
 
     switch (action.type) {
         case LOGIN:
@@ -71,9 +76,9 @@ const userReducer = (state = initialState, action: UserReducerActionsType): Init
             }
 
         case SET_MESSAGES_TO_USER:
-
+            
             users = state.users.map((user) => {
-                if (user.selected) {
+                if (user.selected && action.messages) {
                     user.userMessages = action.messages.reverse();
                 }
                 return user
@@ -86,28 +91,65 @@ const userReducer = (state = initialState, action: UserReducerActionsType): Init
                 ]
             }
 
+        case SET_NEW_REACTION:
+
+            //Getting user 
+            updatedUser = state.users.find((user, index) => {
+                updatedUserIndex = index;
+                return user.username === action.to || user.username === action.from
+            })
+
+            //Getting message from new user
+            if (updatedUser?.userMessages) {
+                updatedMessage = updatedUser.userMessages.find((message, index) => {
+                    updatedIndex = index
+                    return message.id === action.messageId
+                })
+
+                if (updatedIndex !== undefined && updatedMessage !== undefined) {
+                    updatedUser.userMessages[updatedIndex] = { ...updatedMessage, reaction: action.reactionType };
+                }
+            }
+
+            //adding updated user to state
+            if (updatedUser && updatedUserIndex) {
+                updatedUsers = [...state.users];
+                updatedUsers[updatedUserIndex] = updatedUser;
+
+                return {
+                    ...state,
+                    users: updatedUsers
+                }
+            }
+
+            return {
+                ...state
+            }
+
 
 
         case SET_NEW_MESSAGE:
-
-            
-            let updatedIndex: number = 0;
-            let updatedUser = state.users.find((user, index) => {
-                updatedIndex = index;     
+            debugger
+            updatedUser = state.users.find((user, index) => {
+                updatedIndex = index;
                 return user.username === action.to || user.username === action.from
             })
-            
-            
+
+
             if (updatedUser?.userMessages !== undefined) {
                 updatedUser.lastMessage = {
                     createdAt: action.createdAt,
                     messageData: action.messageData
                 }
+
+                
                 updatedUser?.userMessages.push({
                     to: action.to,
                     from: action.from,
                     createdAt: action.createdAt,
-                    messageData: action.messageData
+                    messageData: action.messageData,
+                    id: action.id,
+                    reaction: null
                 });
             }
 
@@ -115,8 +157,8 @@ const userReducer = (state = initialState, action: UserReducerActionsType): Init
             if (updatedUser) {
                 newUsers[updatedIndex] = updatedUser;
             }
+            debugger
 
-            
             return {
                 ...state,
                 users: [

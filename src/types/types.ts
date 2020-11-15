@@ -1,4 +1,4 @@
-import { SET_MESSAGES_TO_USER, SET_NEW_MESSAGE, SET_SELECTED_USER, LOGOUT, LOGIN, SET_USERS } from './../context/Actions';
+import { SET_MESSAGES_TO_USER, SET_NEW_MESSAGE, SET_SELECTED_USER, LOGOUT, LOGIN, SET_USERS, SET_NEW_REACTION } from './../context/Actions';
 
 
 //Initial state type
@@ -13,11 +13,17 @@ export type InitialStateType = {
 
 
 
+export type ReactionType = "SMILE" | "ANGRY" | "FROWN" | "DIZZY" | "LOVE" | null
+
+
+
 export type MessageType = {
     messageData: String,
     from: String,
     to: String,
-    createdAt?: String
+    id: Number
+    reaction: ReactionType
+    createdAt: string
     __typename?: String
 }
 
@@ -71,9 +77,19 @@ export type SetNewMessageActionType = {
     to: String,
     messageData: string,
     createdAt: string
-
+    reacton: ReactionType 
+    id: Number
 }
+
+export type SetNewReactionType = {
+    type: typeof SET_NEW_REACTION,
+    reactionType: ReactionType,
+    messageId: Number
+    to: string,
+    from: string
+}
+
 
 export type UserReducerActionsType = LoginActionType | LogoutActionType | 
 SetMessagesToUserActionType | SetSelectedUserActionType | SetUsersActionType |
-SetNewMessageActionType
+SetNewMessageActionType | SetNewReactionType

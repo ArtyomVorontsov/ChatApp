@@ -1,0 +1,13 @@
+.reactionComponent{
+    display: flex;
+    flex-direction: row;
+    position: absolute;
+    z-index: 10;
+    top: 0
+}
+
+.icon{
+    &:hover{
+        color: black;
+    }
+}

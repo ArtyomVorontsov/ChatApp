@@ -1,0 +1,17 @@
+.reactionComponent {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  position: absolute;
+  z-index: 10;
+  top: 0;
+}
+
+.icon:hover {
+  color: black;
+}
+/*# sourceMappingURL=ReactionComponent.module.css.map */
