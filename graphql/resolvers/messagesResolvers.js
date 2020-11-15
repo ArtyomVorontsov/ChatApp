@@ -54,7 +54,6 @@ module.exports = {
 
                 //event fire
                 pubSub.publish("SEND_MESSAGE", { newMessage: res })
-                
 
                 return res;
 
@@ -71,21 +70,16 @@ module.exports = {
                     throw new UserInputError("Unauthorized", { error: "Unauthorized" });
                 }
 
-                Messages.findOne({ where: { id: messageId } })
-                    .then((message) => {
-                        if (message && context.username === message.from || context.username === message.to) {
-                            newMessage = { ...message, reaction: typeOfReaction }
-                            res = message.update(newMessage)
-                        }
-                    })
+                let message = await Messages.findOne({ where: { id: messageId } })
 
-                let message = await Messages.findOne({ where: { id: messageId } });
-                if (context.username !== message.from && context.username !== message.to) {
-                    throw new UserInputError("Message not found", { error: "Message not found" });
+                if (message && context.username === message.from || context.username === message.to) {
+                    newMessage = { ...message, reaction: typeOfReaction }
+                    res = message.update(newMessage)
                 }
 
-                pubSub.publish("NEW_REACTION", {newReaction: message} );
-    
+
+                pubSub.publish("NEW_REACTION", { newReaction: message });
+
                 return message
 
             } catch (error) {
@@ -110,12 +104,12 @@ module.exports = {
 
         newReaction: {
             subscribe: withFilter(
-                () => pubSub.asyncIterator(["NEW_REACTION"]),  
-                (payload, variables, context)=> {
+                () => pubSub.asyncIterator(["NEW_REACTION"]),
+                (payload, variables, context) => {
                     let newMessage = payload.newReaction.dataValues;
                     return context.username === newMessage.from || context.username === newMessage.to
                 }
-            ) 
+            )
         },
     }
 };
