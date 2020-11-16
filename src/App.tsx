@@ -19,7 +19,6 @@ function App() {
       <ContextProvider>
         <Router>
             <div id="App" className={classes.App} >
-              {/* <NavBar/> */}
               <Switch>
                 <Route path="/" exact render={() => <AuthRoute authenticated={true} ><Home /></AuthRoute>} />
                 <Route path="/register" render={() => <AuthRoute authenticated={false}><Register /></AuthRoute>} />

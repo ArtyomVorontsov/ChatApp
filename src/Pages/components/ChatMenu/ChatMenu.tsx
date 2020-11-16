@@ -5,6 +5,7 @@ import MessageComponent from './MessageComponent/MessageComponent';
 import { gql, useSubscription } from '@apollo/client';
 import { DispatchContext } from '../../../context/ContextProvider';
 import { setNewMessageAC } from '../../../context/Actions';
+import { Form, Button, Row, Col, Container } from 'react-bootstrap';
 
 type PropsType = {
     currentUserChat: UserType | undefined,
@@ -38,7 +39,7 @@ const ChatMenu: React.FC<PropsType> = ({ currentUserChat, sendMessage }) => {
     }
 
     const onSubmit = (e: any) => {
-        if(e){
+        if (e) {
             e.preventDefault();
         }
         if (inputState !== "") {
@@ -54,20 +55,48 @@ const ChatMenu: React.FC<PropsType> = ({ currentUserChat, sendMessage }) => {
         )
     } else {
         return (
-            <form className={classes.chatField} onSubmit={onSubmit}>
+            <Form onSubmit={onSubmit} className={"d-flex h-100 w-100 flex-column"}>
+                <Form.Group className={"d-flex m-0 flex-column h-100 justify-content-space-around "}>
+
                     {allMessages.length !== 0 ?
-                        <div className={classes.chatMenu}>
+                        <Container className={" pb-5 overflow-auto bg-white d-flex h-100 flex-column justify-content-end"}>
                             {allMessages}
-                        </div> :
+                        </Container> :
                         <div className={classes.firstChat}>
                             <p>Send your first message !</p>
                         </div>
                     }
-                    <div className={classes.input}>
-                        <input onChange={(e) => { inputStateHandler(e) }} value={inputState} type="text" />
-                        <button onClick={onSubmit} type="submit"> Send </button>
-                    </div>
-            </form>
+
+
+
+                    <Form.Group className={"d-flex flex-row flex-row w-100 m-0 bg-white align-items-center justify-content-center"}>
+                        
+                            <Form.Control className={"w-50"} onChange={(e) => { inputStateHandler(e) }} value={inputState} type="text" />
+                            <Button type="submit">Send</Button>
+                        
+
+                    </Form.Group>
+                </Form.Group>
+
+
+            </Form>
+
+
+
+            // <form className={classes.chatField} onSubmit={onSubmit}>
+            //         {allMessages.length !== 0 ?
+            //             <div className={classes.chatMenu}>
+            //                 {allMessages}
+            //             </div> :
+            //             <div className={classes.firstChat}>
+            //                 <p>Send your first message !</p>
+            //             </div>
+            //         }
+            //         <div className={classes.input}>
+            //             <input onChange={(e) => { inputStateHandler(e) }} value={inputState} type="text" />
+            //             <button onClick={onSubmit} type="submit"> Send </button>
+            //         </div>
+            // </form>
         )
     }
 }

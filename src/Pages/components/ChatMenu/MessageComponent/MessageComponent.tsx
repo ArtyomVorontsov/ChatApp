@@ -8,6 +8,7 @@ import { faAngry, faSmile, faFrown, faDizzy, faHeart } from "@fortawesome/free-s
 import { gql, useMutation, useSubscription } from '@apollo/client';
 import { DispatchContext } from '../../../../context/ContextProvider';
 import { setNewReactionAC } from '../../../../context/Actions';
+import { Container, Row, Col } from 'react-bootstrap';
 
 
 type PropsType = {
@@ -38,7 +39,7 @@ const MessageComponent: React.FC<PropsType> = ({ message }) => {
         }
     `
 
-    let [setReaction, {data, loading, error} ] = useMutation(SET_REACTION,{
+    let [setReaction, { data, loading, error }] = useMutation(SET_REACTION, {
         onCompleted: (data) => {
             debugger
         },
@@ -61,9 +62,9 @@ const MessageComponent: React.FC<PropsType> = ({ message }) => {
 
     const newReaction = useSubscription(NEW_REACTION);
 
-    useEffect(()=>{
-        
-        if(!newReaction.loading){
+    useEffect(() => {
+
+        if (!newReaction.loading) {
             //@ts-ignore
             dispatch(setNewReactionAC(newReaction.data.newReaction));
         }
@@ -97,28 +98,45 @@ const MessageComponent: React.FC<PropsType> = ({ message }) => {
         }
     }
     let icon = chooseIcon();
-    console.log(message)
+
     return (
-        <>
 
-            <div onClick={reactionsHandler} onMouseLeave={() => setOpen(false)} className={classes.messageBody}>
+        <Container className={"position-relative mb-3 mt-3 "} onClick={reactionsHandler} onMouseLeave={() => setOpen(false)}>
+            <Row className={"justify-content-center"}>
                 <ReactionComponent id={message.id} setReaction={setReaction} open={isOpen} />
-                <div className={classes.userPicWrapper}>
-                    <div className={classes.userPic}></div>
-                    {message.reaction ? <FontAwesomeIcon size={"lg"} className={classes.icon} icon={icon} /> : <div></div>}
-
-                </div>
-
-                <div className={classes.fromAndData}>
-                    <div className={classes.messageFrom}>{message.from}</div>
-                    <div className={classes.messageData}>{message.messageData}</div>
-                </div>
-
-                <div className={classes.date}>
+                <Col className={"d-flex align-items-center justify-content-center"}>
+                    <div className={"position-relative"}>
+                        <div className={classes.userPic}></div>
+                        {message.reaction ? <FontAwesomeIcon size={"lg"} className={classes.icon} icon={icon} /> : <div></div>}
+                    </div>
+                </Col>
+                <Col className={"d-flex flex-column justify-content-center align-items-start"}>
+                    <p className={classes.messageFrom}>{message.from}</p>
+                    <p className={classes.messageData}>{message.messageData}</p>
+                </Col>
+                <Col className={"d-flex justify-content-center"}>
                     <div><p>{dayjs(message.createdAt).format("HH:mm")}</p></div>
-                </div>
-            </div>
-        </>
+                </Col>
+            </Row>
+        </Container>
+
+        // <div onClick={reactionsHandler} onMouseLeave={() => setOpen(false)} className={classes.messageBody}>
+        //     <ReactionComponent id={message.id} setReaction={setReaction} open={isOpen} />
+        //     <div className={classes.userPicWrapper}>
+        //         <div className={classes.userPic}></div>
+        //         {message.reaction ? <FontAwesomeIcon size={"lg"} className={classes.icon} icon={icon} /> : <div></div>}
+
+        //     </div>
+
+        //     <div className={classes.fromAndData}>
+        //         <div className={classes.messageFrom}>{message.from}</div>
+        //         <div className={classes.messageData}>{message.messageData}</div>
+        //     </div>
+
+        //     <div className={classes.date}>
+        //         <div><p>{dayjs(message.createdAt).format("HH:mm")}</p></div>
+        //     </div>
+        // </div>
     )
 }
 
