@@ -5,7 +5,13 @@ import { gql, ApolloError, useLazyQuery } from '@apollo/client';
 import { withRouter, Link } from 'react-router-dom';
 import { StateContext, DispatchContext } from '../context/ContextProvider';
 import { loginAC } from '../context/Actions';
-function Login(props: any) {
+
+
+type propsType = {
+
+}
+
+const Login: React.FC<propsType> = (props) => {
 
   type LoginVariablesType = {
     email: string
@@ -85,14 +91,14 @@ function Login(props: any) {
       <Container>
         <Row lg={3} md={2} sm={7} xs={12} className="justify-content-center">
           <Col>
-            <h2 className="text-center">Login page</h2>
+            <h2 className="text-center text-white">Login page</h2>
             <Form>
               <Form.Group controlId="formBasicEmail">
-                <Form.Label>{errors.email ? errors.email : "Email address"}</Form.Label>
+                <Form.Label className={"text-white"}>{errors.email ? errors.email : "Email address"}</Form.Label>
                 <Form.Control isInvalid={errors.email ? true : false} value={variables.email} onChange={(e: React.ChangeEvent<HTMLInputElement>) => inputHandle("email", e)} type="email" placeholder="Enter email" />
               </Form.Group>
               <Form.Group controlId="formBasicPassword">
-                <Form.Label>{errors.password ? errors.password : "Password"}</Form.Label>
+                <Form.Label className={"text-white"}>{errors.password ? errors.password : "Password"}</Form.Label>
                 <Form.Control isInvalid={errors.password ? true : false} value={variables.password} onChange={(e: React.ChangeEvent<HTMLInputElement>) => inputHandle("password", e)} type="password" placeholder="Enter password" />
               </Form.Group>
               <Row className="justify-content-center align-items-center flex-column">

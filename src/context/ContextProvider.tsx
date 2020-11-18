@@ -58,15 +58,18 @@ const userReducer = (state = initialState, action: UserReducerActionsType): Init
             }
 
         case SET_SELECTED_USER:
+            localStorage.setItem("selectedUsername", action.username);
+
             users = state.users.map((user) => {
                 if (user.username === action.username) {
                     user.selected = true
                 } else {
                     user.selected = false
                 }
-
                 return user
             })
+
+
 
             return {
                 ...state,
@@ -76,7 +79,6 @@ const userReducer = (state = initialState, action: UserReducerActionsType): Init
             }
 
         case SET_MESSAGES_TO_USER:
-            
             users = state.users.map((user) => {
                 if (user.selected && action.messages) {
                     user.userMessages = action.messages.reverse();
@@ -129,7 +131,7 @@ const userReducer = (state = initialState, action: UserReducerActionsType): Init
 
 
         case SET_NEW_MESSAGE:
-            debugger
+
             updatedUser = state.users.find((user, index) => {
                 updatedIndex = index;
                 return user.username === action.to || user.username === action.from
@@ -142,7 +144,7 @@ const userReducer = (state = initialState, action: UserReducerActionsType): Init
                     messageData: action.messageData
                 }
 
-                
+
                 updatedUser?.userMessages.push({
                     to: action.to,
                     from: action.from,
@@ -157,7 +159,7 @@ const userReducer = (state = initialState, action: UserReducerActionsType): Init
             if (updatedUser) {
                 newUsers[updatedIndex] = updatedUser;
             }
-            debugger
+
 
             return {
                 ...state,

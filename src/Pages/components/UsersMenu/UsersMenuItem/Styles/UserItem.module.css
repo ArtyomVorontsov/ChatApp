@@ -1,5 +1,10 @@
 p {
   margin: 0;
+  color: white;
+}
+
+span {
+  color: white;
 }
 
 .userItem {
@@ -11,11 +16,11 @@ p {
       -ms-flex-direction: row;
           flex-direction: row;
   padding: 10px 10px 10px 10px;
-  background-color: white;
+  background-color: #393e46;
 }
 
 .userItem:hover {
-  background-color: whitesmoke;
+  background-color: #393e46;
 }
 
 .userItemSelected {
@@ -27,11 +32,7 @@ p {
       -ms-flex-direction: row;
           flex-direction: row;
   padding: 10px 10px 10px 10px;
-  background-color: whitesmoke;
-}
-
-.userItemSelected:hover {
-  background-color: whitesmoke;
+  background-color: #222831;
 }
 
 .userPicWrapper {
@@ -65,7 +66,7 @@ p {
 
 .dataWrapper p {
   font-size: 15px;
-  color: gray;
+  color: white;
   font-weight: 400;
 }
 

@@ -1,6 +1,7 @@
 import React from 'react'
 import classes from './Styles/UserItem.module.css';
 import dayjs from "dayjs";
+import { Container, Row, Col } from 'react-bootstrap';
 
 type PropsType = {
     username: String,
@@ -18,23 +19,23 @@ const UserItem: React.FC<PropsType> = ({ username, lastMessage, selected }) => {
     let messageData = lastMessage.messageData ? lastMessage.messageData : "You are connected.";
     messageData = messageData.length > 20 ? messageData.slice(0, 20) + "..." : messageData;
     return (
-        <div className={selected ? classes.userItemSelected : classes.userItem}>
-            <div className={classes.userPicWrapper}>
+        <Container  className={ selected ? classes.userItemSelected : classes.userItem}>
+            <Col xs={3} className={classes.userPicWrapper}>
                 <div className={classes.userPic}>
 
                 </div>
-            </div>
-            <div className={classes.userInfo}>
-                <div className={classes.usernameWrapper}>
+            </Col>
+            <Col className={"d-flex flex-column"}>
+                <Col className={classes.usernameWrapper}>
                     <p>{username}</p>
-                </div>
-                <div className={classes.dataWrapper}>
+                </Col>
+                <Col className={classes.dataWrapper}>
                     <p>{messageData}</p>
                     <span>{dayjs(createdAt).format("MMM DD HH:MM")}</span>
-                </div>
-            </div>
+                </Col>
+            </Col>
 
-        </div>
+        </Container>
     )
 }
 export default UserItem

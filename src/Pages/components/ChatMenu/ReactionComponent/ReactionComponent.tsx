@@ -24,11 +24,11 @@ const ReactionComponent: React.FC<propsType> = ({ open, setReaction, id }) => {
     if (open) {
         return (
             <div className={classes.reactionComponent}>
-                <FontAwesomeIcon onClick={() => setVariables("SMILE", id)} className={classes.icon} icon={faSmile} size={"lg"} color="gray"/>
-                <FontAwesomeIcon onClick={() => setVariables("ANGRY", id)} className={classes.icon} icon={faAngry} size={"lg"} color="gray"/>
-                <FontAwesomeIcon onClick={() => setVariables("FROWN", id)} className={classes.icon} icon={faFrown} size={"lg"} color="gray"/>
-                <FontAwesomeIcon onClick={() => setVariables("DIZZY", id)} className={classes.icon} icon={faDizzy} size={"lg"} color="gray"/>
-                <FontAwesomeIcon onClick={() => setVariables("LOVE", id)} className={classes.icon} icon={faHeart} size={"lg"} color="gray"/>
+                <div onClick={() => setVariables("SMILE", id)} className={classes.icon}>😀</div>
+                <div onClick={() => setVariables("ANGRY", id)} className={classes.icon}> 😡</div>
+                <div onClick={() => setVariables("FROWN", id)} className={classes.icon}>🙁 </div>
+                <div onClick={() => setVariables("DIZZY", id)} className={classes.icon}>😫</div>
+                <div onClick={() => setVariables("LOVE", id)} className={classes.icon}>❤️</div>
             </div>
         )
     } else {

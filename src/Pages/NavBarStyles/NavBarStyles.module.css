@@ -3,7 +3,39 @@
   top: 0px;
   width: 200px;
   height: 200px;
-  background-color: white;
+  background-color: #222831;
   z-index: 10;
+}
+
+.modalBody {
+  background-color: #222831;
+}
+
+.accountSection {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-bottom: 40px;
+}
+
+.userPicWrapper {
+  margin-right: 50px;
+}
+
+.userPicWrapper .userPic {
+  width: 100px;
+  height: 100px;
+  border-radius: 100%;
+  background-color: gray;
 }
 /*# sourceMappingURL=NavBarStyles.module.css.map */

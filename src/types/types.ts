@@ -31,7 +31,7 @@ export type MessageType = {
 export type UserType = {
     __typename?: String,
     id: number,
-    username: String,
+    username: string,
     userMessages?: Array<MessageType>,
     selected?: boolean
     lastMessage?: {
@@ -63,7 +63,7 @@ export type SetMessagesToUserActionType = {
 
 export type SetSelectedUserActionType = {
     type: typeof SET_SELECTED_USER ,
-    username: String
+    username: string
 }
 
 export type SetUsersActionType = {

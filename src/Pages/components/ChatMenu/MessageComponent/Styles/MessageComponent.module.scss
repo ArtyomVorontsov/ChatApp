@@ -13,15 +13,18 @@
     }
 }
 
+
 .icon{
     position: absolute;
     left: 60%;
     top: 60%;
     color: gray;
+    font-size: 20px;
+    
 
     
     &:hover{
-        color: black;
+        cursor: pointer;
     }   
 }
 

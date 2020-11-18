@@ -3,9 +3,13 @@ import '../styles/index.scss';
 import { Button, Container, Row, Col, Form } from "react-bootstrap";
 import { gql, useMutation, ApolloError } from '@apollo/client';
 import { Link } from 'react-router-dom';
+import {CREATE_USER} from "../API/API";
 
+type propsType = {
 
-function Register() {
+}
+
+const Register:React.FC<propsType> = (props) => {
 
   type ErrorDataType = {
     email?: string | null,
@@ -24,13 +28,6 @@ function Register() {
   const [variables, setState] = useState(formData);
 
 
-  const CREATE_USER = gql`mutation 
-    createUser($username: String!, $password: String!, $email: String!, $comfirmPassword: String!){
-        createUser( username: $username, password: $password, email: $email, comfirmPassword: $comfirmPassword){
-          username 
-          email
-      }
-    }`
 
 
   const errorData: ErrorDataType = {

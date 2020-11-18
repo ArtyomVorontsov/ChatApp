@@ -1,15 +1,22 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { DispatchContext } from '../../../context/ContextProvider';
 import classes from './Styles/UsersMenu.module.css';
 import UserItem from './UsersMenuItem/UserItem';
 import { UserType } from '../../../types/types';
 import { setSelectedUserAC } from '../../../context/Actions';
-import { Container, Row, Col } from 'react-bootstrap';
+import { Col } from 'react-bootstrap';
+import { ApolloError } from '@apollo/client';
 
-export default function UsersMenu({ loading, error, users }: any) {
+type PropsType = {
+  loading: boolean,
+  error: ApolloError | undefined,
+  users: Array<UserType>
+}
+
+const UsersMenu:React.FC<PropsType> = ({ loading, error, users }) => {
   const dispatch = useContext(DispatchContext);
 
-  const currentUserHanlder = (username: any) => {
+  const currentUserHanlder = (username: string) => {
     //@ts-ignore
     dispatch(setSelectedUserAC(username))
   }
@@ -38,7 +45,7 @@ export default function UsersMenu({ loading, error, users }: any) {
 
     return (
 
-      <Col className={"p-0 h-100 bg-white border border-right-dark"}>
+      <Col className={classes.allUsers}>
         {allUsers}
       </Col>
 
@@ -48,3 +55,5 @@ export default function UsersMenu({ loading, error, users }: any) {
 
 
 
+
+export default UsersMenu;

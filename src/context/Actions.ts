@@ -14,7 +14,6 @@ export const SET_NEW_REACTION = "SET_NEW_REACTION";
 
 
 export const loginAC = ({username, token}: any): LoginActionType => {
-    debugger
     return ({ type: LOGIN, username, token })
 }
 
@@ -30,7 +29,7 @@ export const setMessagesToUserAC = ( messages: any): SetMessagesToUserActionType
     return ({ type: SET_MESSAGES_TO_USER, messages })
 }
 
-export const setSelectedUserAC = ( username: any): SetSelectedUserActionType => {
+export const setSelectedUserAC = ( username: string): SetSelectedUserActionType => {
     return ({ type: SET_SELECTED_USER, username })
 }
 

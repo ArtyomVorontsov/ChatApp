@@ -10,7 +10,6 @@ import Home from './Pages/Home';
 import { ContextProvider } from "./context/ContextProvider";
 import AuthRoute from './util/authRoute';
 import classes from "./App.module.css";
-import NavBar from './Pages/NavBar';
 
 function App() {
 

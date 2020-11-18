@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactComponentElement } from 'react';
 import '../styles/index.scss';
 import UsersMenu from './components/UsersMenu/UsersMenu';
 import ChatMenuContainer from './components/ChatMenu/ChatMenuContainer';
@@ -8,7 +8,11 @@ import classes from './HomeStyles/Home.module.css';
 import NavBar from './NavBar';
 
 
-function Home(props: any) {
+type propsType = {
+
+}
+
+const Home: React.FC<propsType> = (props) => {
 
   return (
     <div className={classes.home}>

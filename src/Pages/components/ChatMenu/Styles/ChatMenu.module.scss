@@ -1,7 +1,9 @@
+//@import "../../../styles/globalStyles.scss";
+
 @mixin transparentParagraph {
     font-size: 30px;
     font-weight: 500;
-    color: rgba($color: #000000, $alpha: 0.1);
+    color: rgba($color: #ffffff, $alpha: 0.1);
 }
 
 @mixin alignItems($flexDirection) {
@@ -19,7 +21,7 @@
 $color: white;
 
 .initialScreen{
-    background-color: $color;
+    background-color: #393e46;
    @include fullWidthAndHeight();
    @include alignItems(column);
     p{
@@ -28,9 +30,10 @@ $color: white;
 }
 
 .chatMenu{
-    padding-top: 20px;
+    background-color: #393e46;
+    width: 100%;
+    padding-top: 0px;
     border: solid 1px transparent;
-    background-color: $color;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -40,7 +43,7 @@ $color: white;
 }
 
 .firstChat{
-    background-color: $color;
+    background-color: #393e46;
     @include alignItems(column);
     @include fullWidthAndHeight();
 
@@ -49,12 +52,29 @@ $color: white;
     }
 }
 
+.inputWrapper{
+    @include alignItems(row);
+    border-top: solid 1px rgb(99,99,99);
+}
+
 .input{
+    outline: none;
     background-color: $color;
     @include alignItems(row);
-    height: 100px;
+    height: 40px;
+    background-color: #393e46;
+    border-radius: 0px;
+    border: 0;
+    color: white;
+
     button{
         width: 100px;
+    }
+
+    &:focus{
+        outline: none;
+        background-color: #393e46;
+        color: white;
     }
 
     input{

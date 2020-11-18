@@ -14,8 +14,6 @@ type PropsType = {
 
 const ChatMenu: React.FC<PropsType> = ({ currentUserChat, sendMessage }) => {
 
-    console.log("rerender");
-    console.log(currentUserChat)
     let allMessages: null | Array<JSX.Element> = null;
 
     if (currentUserChat?.userMessages != undefined) {
@@ -55,11 +53,14 @@ const ChatMenu: React.FC<PropsType> = ({ currentUserChat, sendMessage }) => {
         )
     } else {
         return (
-            <Form onSubmit={onSubmit} className={"d-flex h-100 w-100 flex-column"}>
-                <Form.Group className={"d-flex m-0 flex-column h-100 justify-content-space-around "}>
+            <Form onSubmit={onSubmit} className={classes.chatMenu}>
+                <Form.Group className={"d-flex m-0 flex-column h-100 w-100 justify-content-space-around "}>
+                    <Row className={" p-0 m-0 d-flex align-items-center justify-content-center border-bottom border-white"}>
+                        <p>{currentUserChat?.username}</p>
+                    </Row>
 
                     {allMessages.length !== 0 ?
-                        <Container className={" pb-5 overflow-auto bg-white d-flex h-100 flex-column justify-content-end"}>
+                        <Container className={" pb-5 overflow-auto d-flex h-100 flex-column"}>
                             {allMessages}
                         </Container> :
                         <div className={classes.firstChat}>
@@ -69,34 +70,14 @@ const ChatMenu: React.FC<PropsType> = ({ currentUserChat, sendMessage }) => {
 
 
 
-                    <Form.Group className={"d-flex flex-row flex-row w-100 m-0 bg-white align-items-center justify-content-center"}>
-                        
-                            <Form.Control className={"w-50"} onChange={(e) => { inputStateHandler(e) }} value={inputState} type="text" />
-                            <Button type="submit">Send</Button>
-                        
-
+                    <Form.Group className={classes.inputWrapper}>
+                        <Form.Control placeholder="Type a message..." className={classes.input} onChange={(e) => { inputStateHandler(e) }} value={inputState} type="text" />
+                        <Button type="submit">Send</Button>
                     </Form.Group>
                 </Form.Group>
 
 
             </Form>
-
-
-
-            // <form className={classes.chatField} onSubmit={onSubmit}>
-            //         {allMessages.length !== 0 ?
-            //             <div className={classes.chatMenu}>
-            //                 {allMessages}
-            //             </div> :
-            //             <div className={classes.firstChat}>
-            //                 <p>Send your first message !</p>
-            //             </div>
-            //         }
-            //         <div className={classes.input}>
-            //             <input onChange={(e) => { inputStateHandler(e) }} value={inputState} type="text" />
-            //             <button onClick={onSubmit} type="submit"> Send </button>
-            //         </div>
-            // </form>
         )
     }
 }

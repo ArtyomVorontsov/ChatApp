@@ -9,6 +9,7 @@ import { gql, useMutation, useSubscription } from '@apollo/client';
 import { DispatchContext } from '../../../../context/ContextProvider';
 import { setNewReactionAC } from '../../../../context/Actions';
 import { Container, Row, Col } from 'react-bootstrap';
+import { NEW_REACTION, SET_REACTION } from "../../../../API/API"
 
 
 type PropsType = {
@@ -20,45 +21,17 @@ const MessageComponent: React.FC<PropsType> = ({ message }) => {
 
     let [isOpen, setOpen] = useState(false);
 
-    let reactionsHandler = () => {
-        isOpen ? setOpen(false) : setOpen(true)
-    }
+    let reactionsHandler = () => {isOpen ? setOpen(false) : setOpen(true)}
 
     let dispatch = useContext(DispatchContext);
 
-    let SET_REACTION = gql`
-        mutation setReaction($typeOfReaction: String!, $messageId: Int!){
-            setReaction(typeOfReaction: $typeOfReaction, messageId: $messageId){
-                id
-                createdAt
-                messageData
-                reaction
-                from
-                to
-            }
-        }
-    `
 
     let [setReaction, { data, loading, error }] = useMutation(SET_REACTION, {
-        onCompleted: (data) => {
-            debugger
-        },
         onError: (error) => {
             console.log(error)
         }
     });
 
-    let NEW_REACTION = gql`
-        subscription{
-            newReaction{
-                reaction
-                from
-                to
-                from
-                id
-            }
-        }
-    `
 
     const newReaction = useSubscription(NEW_REACTION);
 
@@ -72,29 +45,30 @@ const MessageComponent: React.FC<PropsType> = ({ message }) => {
     }, [newReaction.data])
 
 
+
     let chooseIcon = () => {
         switch (message.reaction) {
             case "SMILE":
-                return faSmile
+                return "😀"
 
 
             case "ANGRY":
-                return faAngry
+                return "😡"
 
 
             case "FROWN":
-                return faFrown
+                return "🙁"
 
 
             case "DIZZY":
-                return faDizzy
+                return "😫"
 
 
             case "LOVE":
-                return faHeart
+                return "❤️"
 
             default:
-                return faFrown
+                return "🙁"
         }
     }
     let icon = chooseIcon();
@@ -107,7 +81,7 @@ const MessageComponent: React.FC<PropsType> = ({ message }) => {
                 <Col className={"d-flex align-items-center justify-content-center"}>
                     <div className={"position-relative"}>
                         <div className={classes.userPic}></div>
-                        {message.reaction ? <FontAwesomeIcon size={"lg"} className={classes.icon} icon={icon} /> : <div></div>}
+                        {message.reaction ? <div><p className={classes.icon}>{icon}</p></div> : <div></div>}
                     </div>
                 </Col>
                 <Col className={"d-flex flex-column justify-content-center align-items-start"}>
@@ -115,28 +89,10 @@ const MessageComponent: React.FC<PropsType> = ({ message }) => {
                     <p className={classes.messageData}>{message.messageData}</p>
                 </Col>
                 <Col className={"d-flex justify-content-center"}>
-                    <div><p>{dayjs(message.createdAt).format("HH:mm")}</p></div>
+                    <div><p className={"text-white"}>{dayjs(message.createdAt).format("HH:mm")}</p></div>
                 </Col>
             </Row>
         </Container>
-
-        // <div onClick={reactionsHandler} onMouseLeave={() => setOpen(false)} className={classes.messageBody}>
-        //     <ReactionComponent id={message.id} setReaction={setReaction} open={isOpen} />
-        //     <div className={classes.userPicWrapper}>
-        //         <div className={classes.userPic}></div>
-        //         {message.reaction ? <FontAwesomeIcon size={"lg"} className={classes.icon} icon={icon} /> : <div></div>}
-
-        //     </div>
-
-        //     <div className={classes.fromAndData}>
-        //         <div className={classes.messageFrom}>{message.from}</div>
-        //         <div className={classes.messageData}>{message.messageData}</div>
-        //     </div>
-
-        //     <div className={classes.date}>
-        //         <div><p>{dayjs(message.createdAt).format("HH:mm")}</p></div>
-        //     </div>
-        // </div>
     )
 }
 
