@@ -1,6 +1,9 @@
 const { gql } = require("apollo-server");
 
 module.exports = gql`
+
+
+
   type User {
     username: String,
     id: Int,
@@ -77,6 +80,8 @@ module.exports = gql`
       to: String!,
       messageData: String!
     ): SendedMessage
+
+    setUserPic(url: String!): String!
   }
 
   type Subscription {

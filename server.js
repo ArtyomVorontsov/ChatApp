@@ -5,15 +5,8 @@ const { sequelize } = require("./models/index");
 const loginMiddleware = require("./graphql/utils/loginMiddleware");
 
 const server = new ApolloServer({ typeDefs, resolvers, context: async ({req, connection}) => {
-  // console.log(req)
-  // console.log(connection)
-  // if (connection) {
-  //   console.log(connection.context.Authorization)
-  //   return loginMiddleware(connection)
-  // } else {
     let res = {req, connection};
     return loginMiddleware(res)
-  //}
 } });
 
 server.listen().then(({ url }) => {

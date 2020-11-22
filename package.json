@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon server.js --ignore react/",
+    "dev": "nodemon server.js --ignore react/ ",
     "start": "node server.js"
   },
   "keywords": [],

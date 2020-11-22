@@ -18,7 +18,6 @@ module.exports = {
   },
 
 
-
   Query: {
     getUsers: usersResolvers.Query.getUsers,
     login: usersResolvers.Query.login,
@@ -28,7 +27,8 @@ module.exports = {
   Mutation: {
     createUser: usersResolvers.Mutation.createUser,
     sendMessage: messagesResolvers.Mutation.sendMessage,
-    setReaction: messagesResolvers.Mutation.setReaction
+    setReaction: messagesResolvers.Mutation.setReaction,
+    setUserPic: usersResolvers.Mutation.setUserPic
   },
 
   Subscription: {

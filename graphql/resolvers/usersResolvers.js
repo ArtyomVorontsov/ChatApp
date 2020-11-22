@@ -23,16 +23,16 @@ module.exports = {
         let allUserMessages = await Messages.findAll({
           where: {
             [Op.or]: [
-              {from: username},
-              {to: username},
+              { from: username },
+              { to: username },
             ],
           },
           order: [["createdAt", "DESC"]]
         })
 
-        users = users.map((user)=>{
-          const lastetMessage = allUserMessages.find((message)=>{
-             return message.to === user.username || message.from === user.username
+        users = users.map((user) => {
+          const lastetMessage = allUserMessages.find((message) => {
+            return message.to === user.username || message.from === user.username
           })
           user.lastMessage = lastetMessage
           return user
@@ -120,5 +120,25 @@ module.exports = {
         throw res;
       }
     },
+
+    setUserPic: async (parent, { url }, context, info) => {
+      try {
+
+        if (context.err) {
+          throw new UserInputError("Unauthorized", { error: context.err })
+        }
+
+        if (!url) throw { err: "url must not be empty" }
+        console.log(context.username)
+        let user = await User.findOne({ where: {username: context.username } });
+        if (!user) throw { err: "user not found" }
+        user.update({userpic: url});
+        return url;
+
+
+      } catch (error) {
+        throw new UserInputError("Bad input", { error });
+      }
+    }
   }
 };
